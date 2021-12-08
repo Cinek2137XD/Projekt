@@ -96,6 +96,21 @@ typedef struct card{
 } card_t;
 
 void print_card(card_t card) {
+	if (card.number == ten) {
+	std::cout << "┌───────┐\n";
+    std::cout << "│";
+    std::cout << card.number;
+    std::cout << "     │\n│";
+    print_suit(card.suit);
+    std::cout << "      │\n";
+    std::cout << "│       │\n";
+    std::cout << "│      ";
+    print_suit(card.suit);
+    std::cout << "│\n│     ";
+    std::cout << card.number;
+    std::cout << "│\n";
+    std::cout << "└───────┘\n";
+	} else {
     std::cout << "┌───────┐\n";
     std::cout << "│";
     std::cout << card.number;
@@ -109,13 +124,14 @@ void print_card(card_t card) {
     std::cout << card.number;
     std::cout << "│\n";
     std::cout << "└───────┘\n";
+	}
 }
 
 int main() {
     card_t ace_diamond;
 
     ace_diamond.suit = diamond;
-    ace_diamond.number = nine;
+    ace_diamond.number = ten;
 
     print_card(ace_diamond);
 
