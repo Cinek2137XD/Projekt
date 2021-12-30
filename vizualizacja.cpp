@@ -5,42 +5,20 @@
 #define HEART "\u2665"
 #define DIAMOND "\u2666"
 
-typedef enum Suit {
-    spade = 1,
-    club,
-    heart,
-    diamond
-} suit_t;
-
-typedef enum Number {
-    two = 2,
-    three,
-    four,
-    five,
-    six,
-    seven,
-    eight,
-    nine,
-    ten,
-    jack,
-    queen,
-    king,
-    ace
-} number_t;
 
 void print_suit(int suitToSelect) {
     
     switch (suitToSelect) {
-        case spade:
+        case 1:
             std::cout << SPADE ;
             break;
-        case club:
+        case 2:
             std::cout << CLUB ;
             break;
-        case heart:
+        case 3:
             std::cout << HEART ;
             break;
-        case diamond:
+        case 4:
             std::cout << DIAMOND ;
             break;
     }
@@ -48,90 +26,94 @@ void print_suit(int suitToSelect) {
 
 void print_number(int numberToSelect) {
     switch (numberToSelect) {
-        case two:
+        case 2:
             std::cout << "2" ;
             break;
-        case three:
+        case 3:
             std::cout << "3" ;
             break;
-        case four:
+        case 4:
             std::cout << "4" ;
             break;
-        case five:
+        case 5:
             std::cout << "5" ;
             break;
-        case six:
+        case 6:
             std::cout << "6" ;
             break;
-        case seven:
+        case 7:
             std::cout << "7" ;
             break;
-        case eight:
+        case 8:
             std::cout << "8" ;
             break;
-        case nine:
+        case 9:
             std::cout << "9" ;
             break;
-        case ten:
+        case 10:
             std::cout << "10" ;
             break;
-        case jack:
+        case 11:
             std::cout << "J" ;
             break;
-        case queen:
+        case 12:
             std::cout << "Q" ;
             break;
-        case king:
+        case 13:
             std::cout << "K" ;
             break;
-        case ace:
+        case 14:
             std::cout << "A" ;
             break;
     }
 }
 
-typedef struct card{
-    suit_t suit;
-    number_t number;
-} card_t;
+typedef struct card
+{
+    int suit;
+    int number;
+};
 
-void print_card(card_t card) {
-	if (card.number == ten) {
-	std::cout << "┌───────┐\n";
-    std::cout << "│";
-    print_number(card.number);
-    std::cout << "     │\n│";
-    print_suit(card.suit);
-    std::cout << "      │\n";
-    std::cout << "│       │\n";
-    std::cout << "│      ";
-    print_suit(card.suit);
-    std::cout << "│\n│     ";
-    print_number(card.number);
-    std::cout << "│\n";
-    std::cout << "└───────┘\n";
+void print_card(card karta) {
+	if (karta.number == 10) {
+	std::cout << "________\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "     |\n|";
+    print_suit(karta.suit);
+    std::cout << "      |\n";
+    std::cout << "|       |\n";
+    std::cout << "|      ";
+    print_suit(karta.suit);
+    std::cout << "|\n|     ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_______|\n";
 	} else {
-    std::cout << "┌───────┐\n";
-    std::cout << "│";
-    print_number(card.number);
-    std::cout << "      │\n│";
-    print_suit(card.suit);
-    std::cout << "      │\n";
-    std::cout << "│       │\n";
-    std::cout << "│      ";
-    print_suit(card.suit);
-    std::cout << "│\n│      ";
-    print_number(card.number);
-    std::cout << "│\n";
-    std::cout << "└───────┘\n";
+    std::cout << " _______\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "      |\n|";
+    print_suit(karta.suit);
+    std::cout << "      |\n";
+    std::cout << "|   ";
+    print_suit(karta.suit);
+    std::cout<<"   |\n";
+    std::cout << "|      ";
+    print_suit(karta.suit);
+    std::cout << "|\n|      ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_______|\n";
 	}
 }
 
-int main() {
-    card_t ace_diamond;
+int main() 
+{
+    card ace_diamond;
 
-    ace_diamond.suit = diamond;
-    ace_diamond.number = ace;
+    ace_diamond.suit = 1;
+    ace_diamond.number = 8;
 
     print_card(ace_diamond);
 
