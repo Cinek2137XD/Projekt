@@ -1,13 +1,22 @@
 #include <iostream>
+#include <string>
 
 #define SPADE "\u2660"
 #define CLUB "\u2663"
 #define HEART "\u2665"
 #define DIAMOND "\u2666"
+#define king "\u2654"
+#define queen "\u2655"
+#define jack "\u2694"
+#define top "\uFE35"
+#define lup "\u239B"
+#define llw "\u239D"
+#define rup "\u239E"
+#define rlw "\u23A0"
+#define bot_p "\uFE36"
 
 
-void print_suit(int suitToSelect) {
-    
+void print_suit(int suitToSelect) {   //funkcja przyjmuje zmienna ktora odpowiada kazdemu kolorowi kart
     switch (suitToSelect) {
         case 1:
             std::cout << SPADE ;
@@ -24,7 +33,7 @@ void print_suit(int suitToSelect) {
     }
 }
 
-void print_number(int numberToSelect) {
+void print_number(int numberToSelect) {   //funkcja przyjmuje zmienna ktora odpowiada numerowi karty
     switch (numberToSelect) {
         case 2:
             std::cout << "2" ;
@@ -68,54 +77,481 @@ void print_number(int numberToSelect) {
     }
 }
 
-typedef struct card
+typedef  struct card
 {
     int suit;
     int number;
 };
 
-void print_card(card karta) {
-	if (karta.number == 10) {
-	std::cout << "________\n";
+void print_card(card karta) {   //funkcja drukuje karte uzywajac poprzednich funkcji
+	if (karta.number == 10 ) {
+	std::cout << " _____________\n";
+    std::cout << "|             |\n";
     std::cout << "|";
     print_number(karta.number);
-    std::cout << "     |\n|";
+    std::cout << "           |\n";
+    std::cout <<"|";
     print_suit(karta.suit);
-    std::cout << "      |\n";
-    std::cout << "|       |\n";
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
     std::cout << "|      ";
     print_suit(karta.suit);
-    std::cout << "|\n|     ";
+    std::cout<<"      |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
+    std::cout << "|             |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
+    std::cout << "|      ";
+    print_suit(karta.suit);
+    std::cout<<"      |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "|\n|           ";
     print_number(karta.number);
     std::cout << "|\n";
-    std::cout << "|_______|\n";
-	} else {
-    std::cout << " _______\n";
+    std::cout << "|_____________|\n";
+	} else if (karta.number == 9) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
     std::cout << "|";
     print_number(karta.number);
-    std::cout << "      |\n|";
+    std::cout << "            |\n";
+    std::cout <<"|";
     print_suit(karta.suit);
-    std::cout << "      |\n";
-    std::cout << "|   ";
+    std::cout << "   ";
     print_suit(karta.suit);
-    std::cout<<"   |\n";
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
+    std::cout << "|             |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
     std::cout << "|      ";
     print_suit(karta.suit);
-    std::cout << "|\n|      ";
+    std::cout<<"      |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
+    std::cout << "|             |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "|\n|            ";
     print_number(karta.number);
     std::cout << "|\n";
-    std::cout << "|_______|\n";
+    std::cout << "|_____________|\n";
 	}
+    else if (karta.number == 8) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout <<"|";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
+    std::cout << "|      ";
+    print_suit(karta.suit);
+    std::cout<<"      |\n";
+    std::cout << "|             |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
+    std::cout << "|             |\n";
+    std::cout << "|      ";
+    print_suit(karta.suit);
+    std::cout<<"      |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "|\n|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}
+    else if (karta.number == 7) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout <<"|";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
+    std::cout << "|      ";
+    print_suit(karta.suit);
+    std::cout<<"      |\n";
+    std::cout << "|             |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "|\n|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}
+    else if (karta.number == 6) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout <<"|";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "|\n|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}
+    else if (karta.number == 5) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout <<"|";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|      ";
+    print_suit(karta.suit);
+    std::cout<<"      |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "|\n|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}
+    else if (karta.number == 4) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout <<"|";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "    |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|    ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "   ";
+    print_suit(karta.suit);
+    std::cout << "|\n|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}
+    else if (karta.number == 3) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout <<"|";
+    print_suit(karta.suit);
+    std::cout << "     ";
+    print_suit(karta.suit);
+    std::cout<<"      |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|      ";
+    print_suit(karta.suit);
+    std::cout<<"      |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|      ";
+    print_suit(karta.suit);
+    std::cout<<"     ";
+    print_suit(karta.suit);
+    std::cout << "|\n|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}
+    else if (karta.number == 2) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout <<"|";
+    print_suit(karta.suit);
+    std::cout << "     ";
+    print_suit(karta.suit);
+    std::cout<<"      |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|      ";
+    print_suit(karta.suit);
+    std::cout<<"     ";
+    print_suit(karta.suit);
+    std::cout << "|\n|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}
+    else if (karta.number == 11) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout << "|"; 
+    print_suit(karta.suit);
+    std::cout << "            |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|      " jack "      |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|            ";
+    print_suit(karta.suit);
+    std::cout<<"|\n";
+    std::cout << "|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}
+    
+    else if (karta.number == 12) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout << "|"; 
+    print_suit(karta.suit);
+    std::cout << "            |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|      " queen "      |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|            ";
+    print_suit(karta.suit);
+    std::cout<<"|\n";
+    std::cout << "|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}
+    else if (karta.number == 13) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout << "|"; 
+    print_suit(karta.suit);
+    std::cout << "            |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|      " king "      |\n";
+    std::cout << "|             |\n";
+    std::cout << "|             |\n";
+    std::cout << "|            ";
+    print_suit(karta.suit);
+    std::cout<<"|\n";
+    std::cout << "|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}
+    else if (karta.number == 14 && karta.suit == 2) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout << "|"; 
+    print_suit(karta.suit);
+    std::cout << "     " top"     |\n";
+    std::cout << "|     " lup "##" rup "    |\n";
+    std::cout << "|   " top llw "##" rlw top "  |\n";
+    std::cout << "|  " lup"########" rup" |\n";
+    std::cout << "|  " llw"########" rlw" |\n";
+    std::cout << "|    " bot_p"/\\" bot_p"   |\n";
+    std::cout << "|            ";
+    print_suit(karta.suit);
+    std::cout<<"|\n";
+    std::cout << "|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}
+    else if (karta.number == 14 && karta.suit == 1) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout << "|"; 
+    print_suit(karta.suit);
+    std::cout << "            |\n";
+    std::cout << "|      /\\     |\n";
+    std::cout << "|     /##\\    |\n";
+    std::cout << "|    /####\\   |\n";
+    std::cout << "|    \\#/\\#/   |\n";
+    std::cout << "|      /\\     |\n";
+    std::cout << "|            ";
+    print_suit(karta.suit);
+    std::cout<<"|\n";
+    std::cout << "|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}else if (karta.number == 14 && karta.suit==3) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout << "|"; 
+    print_suit(karta.suit);
+    std::cout << "   __  __   |\n";
+    std::cout << "|   /##\\/##\\  |\n";
+    std::cout << "|   \\######/  |\n";
+    std::cout << "|    \\####/   |\n";
+    std::cout << "|     \\##/    |\n";
+    std::cout << "|      \\/     |\n";
+    std::cout << "|            ";
+    print_suit(karta.suit);
+    std::cout<<"|\n";
+    std::cout << "|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}else if (karta.number == 14 && karta.suit==4) {
+    std::cout << " _____________\n";
+    std::cout << "|             |\n";
+    std::cout << "|";
+    print_number(karta.number);
+    std::cout << "            |\n";
+    std::cout << "|"; 
+    print_suit(karta.suit);
+    std::cout << "            |\n";
+    std::cout << "|      /\\     |\n";
+    std::cout << "|     /##\\    |\n";
+    std::cout << "|    /####\\   |\n";
+    std::cout << "|    \\####/   |\n";
+    std::cout << "|     \\##/    |\n";
+    std::cout << "|      \\/    ";
+    print_suit(karta.suit);
+    std::cout<<"|\n";
+    std::cout << "|            ";
+    print_number(karta.number);
+    std::cout << "|\n";
+    std::cout << "|_____________|\n";
+	}
+    
+    
 }
+
+
 
 int main() 
 {
     card ace_diamond;
 
     ace_diamond.suit = 1;
-    ace_diamond.number = 8;
+    ace_diamond.number = 14;
 
     print_card(ace_diamond);
+
+    card hearth_diamond;
+    hearth_diamond.suit=2;
+    hearth_diamond.number=14;
+    print_card(hearth_diamond);
 
     return 0;
 }
