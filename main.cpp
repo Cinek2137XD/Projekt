@@ -4,7 +4,6 @@
 #include <time.h>
 #include <stdio.h>
 #include <vector>
-//#include <head.h>
 #define SPADE "\u2660"
 #define CLUB "\u2663"
 #define HEART "\u2665"
@@ -31,15 +30,16 @@ int random_number() // zwraca losową liczbę od 2 do 14
     return rand() % 14 + 2;
 }
 
-void menu()
+void menu() // drukowanie menu
 {
     system("CLS");
     std::cout << "---------------------------------------------\n\n";
-    std::cout << " WITAJ! \n\n\nW ZESTAWIE GIER KARCIANYCH\n\nMarcin Kukus\nMateusz Placha\n\n";
+    std::cout << " WITAJ! \n\n\nW BLACKJACK\n\nMarcin Kukus\nMateusz Placha\n\n";
     std::cout << "---------------------------------------------\n";
-    std::cout << "Wybiez gre: \n";
-    std::cout << "\n\n";
-    std::cout << "1.blackjack \n\n";
+    system("pause");
+    //std::cout << "Wybiez gre: \n";
+    //std::cout << "\n\n";
+    //std::cout << "1.blackjack \n\n";
 }
 
 struct card
@@ -50,7 +50,7 @@ struct card
     int points();
 };
 
-int card::points()
+int card::points() //liczy punktry dla danej karty
 {
     if (number > 10)
     {
@@ -62,7 +62,7 @@ int card::points()
     }
 }
 
-bool sch_vec(std::vector<card> karty, int suit, int num)
+bool sch_vec(std::vector<card> karty, int suit, int num) //szuka karty w wektorze
 {
     for (size_t i = 0; i < karty.size(); i++)
     {
@@ -74,7 +74,7 @@ bool sch_vec(std::vector<card> karty, int suit, int num)
     return true;
 }
 
-void card::random_card(std::vector<card> karty)
+void card::random_card(std::vector<card> karty) //losuje kartę oraz upewnia się czy karta nie została wcześniej dobrana
 {
     while (true)
     {
@@ -88,14 +88,6 @@ void card::random_card(std::vector<card> karty)
             break;
         }
     }
-}
-
-card de_id(std::vector<card> karty, int numer)
-{
-    card temp;
-    temp.number = karty[numer].number;
-    temp.suit = karty[numer].suit;
-    return temp;
 }
 
 void print_suit(int suitToSelect)
@@ -644,75 +636,147 @@ int main()
     vallet = 100;
     bool status = true;
 
-    while (status)
+    while (status) //inicjalizacja gry
     {
         std::string h_bust;
         vector<card> dobrane;
         menu();
-        cin >> decision;
-        switch (decision)
+        bool statusBJ = true;
+
+        while (statusBJ)
         {
-        case 1:
-
-            //card d_card, p_card, temp_card;
-            //int d_point, p_point, bet;
-            bool statusBJ = true; //, h_s= true, round = true;
-
-            while (statusBJ)
+            card d_card, p_card, temp_card;
+            int d_point = 0, p_point = 0, bet;
+            bool h_s = true, round = true;
+            system("cls");
+            cout << "Ile chcesz obstawic?\nSrodki: " << vallet << "\n"; //obstawianie
+            cin >> bet;
+            if (bet <= vallet) //rozłożenie kart dla użytkownika i dealera
             {
-                card d_card, p_card, temp_card;
-                int d_point = 0, p_point =0, bet;
-                bool h_s = true, round = true;
-                system("cls");
-                cout << "Ile chcesz obstawic?\nSrodki: " << vallet << "\n";
-                cin >> bet;
-                if (bet <= vallet) //rozłożenie kart dla użytkownika i dealera
+                vallet -= bet;
+                p_card.random_card(dobrane);
+                p_point += p_card.points();
+                dobrane.push_back(p_card); //0
+                print_card(p_card);
+
+                d_card.random_card(dobrane);
+                d_point = d_card.points();
+                dobrane.push_back(d_card); //1
+
+                p_card.random_card(dobrane);
+                p_point += p_card.points();
+                dobrane.push_back(p_card); //2
+                print_card(p_card);
+
+                d_card.random_card(dobrane);
+                d_point += d_card.points();
+                dobrane.push_back(d_card); //3;
+                cout << d_point << " " << p_point << "\n";
+                if (p_point > 21) //bust po dobraniu
                 {
-                    vallet -= bet;
-                    p_card.random_card(dobrane);
-                    p_point += p_card.points();
-                    dobrane.push_back(p_card); //0
-                    print_card(p_card);
-                    //cout<<"Karta dealera: \n";
-
-                    d_card.random_card(dobrane);
-                    d_point = d_card.points();
-                    dobrane.push_back(d_card); //1
-                    //system("pause");
-
-                    p_card.random_card(dobrane);
-                    p_point += p_card.points();
-                    dobrane.push_back(p_card); //2
-                    print_card(p_card);
-
-                    d_card.random_card(dobrane);
-                    d_point += d_card.points();
-                    dobrane.push_back(d_card); //3;
-                    cout << d_point << " "<<p_point <<"\n";
-                    if (p_point > 21)
+                    cout << "BUST!!!\n\n przegrano: " << bet << "\n";
+                    system("pause");
+                }
+                else if (p_point == 21) // przypadek BLACKJACK
+                {
+                    cout << "Blackjack!!!!\n\n";
+                    while (d_point < 16) //efekty gry zależnie od punktów dealera
                     {
-                        cout << "BUST!!!\n\n przegrano: " << bet << "\n";
+                        d_card.random_card(dobrane);
+                        d_point += d_card.points();
+                        dobrane.push_back(d_card);
+                        print_card(d_card);
+                    }
+                    if (d_point > 21)
+                    {
+                        vallet += 3 * bet;
+                        cout << "Dealer zbustowal!!!!!\n\nWygrana: " << bet * 2 << "\n\nIlosc pieniedzy: " << vallet << "\n";
                         system("pause");
                     }
-                    else if (p_point == 21) // przypadek BLACKJACK
+                    else if (d_point < p_point)
                     {
-                        cout << "Blackjack!!!!\n\n";
-                        while (d_point < 16)
+                        vallet += 3 * bet;
+                        cout << "Wygrana!!!!!\n\nZysk: " << 2 * bet << "\n\nPunkty dealera: " << d_point << " Punkty gracza: " << p_point << "\n\nIlosc pieniedzy: " << vallet << "\n";
+                        system("pause");
+                    }
+                    else
+                    {
+                        vallet += bet;
+                        cout << "Remis!!!\n\nPunkty dealera: " << d_point << " Punkty gracza: " << p_point << "\n\nIlosc pieniedzy: " << vallet << "\n";
+                        system("pause");
+                    }
+                }
+                else if (p_point < 21)
+                {
+                    while (round)
+                    {
+                        cout << "Ilosc punktow: " << p_point << "\nPunkty dealera: " << d_point << "\nHit? Stand?\n"; //dobieranie kart dodatkowych przez użytkownika
+                        cin >> h_bust;
+                        while (h_s)
+                        {
+                            if ((h_bust == "hit") || (h_bust == "Hit"))
+                            {
+                                p_card.random_card(dobrane);
+                                p_point += p_card.points();
+                                dobrane.push_back(p_card);
+
+                                print_card(p_card);
+                                if (p_point > 21)
+                                {
+                                    cout << "BUST!!!\n\n przegrano: " << bet << "\n";
+                                    system("pause");
+                                    round = false;
+                                }
+                                h_s = false;
+                            }
+                            else if ((h_bust == "Stand") || (h_bust == "stand"))
+                            {
+                                round = false;
+                                h_s = false;
+                            }
+                            else
+                            {
+                                cout << "Prosze odpowiedziec Hit/Stand\n";
+                                h_s = false;
+                            }
+                        }
+                    }
+                }
+
+                if (p_point < 21)
+                {
+                    cout << "Tura dealera...\n\n\n\n\n";
+                    temp_card = dobrane[1];
+                    print_card(temp_card);
+                    print_card(d_card);
+                    if (d_point > 21) //sprawdzenie czy punkty dealera nie przekraczają 21
+                    {
+                        cout << "Dealer zbustowal!!!!!\n\nWygrana: " << bet * 2 << "\n\n";
+                        vallet += 2 * bet;
+                    }
+                    else
+                    {
+                        while (d_point < 16) // funkcja powoduje że dealer dobiera aż osiągnie 16 punktów
                         {
                             d_card.random_card(dobrane);
                             d_point += d_card.points();
                             dobrane.push_back(d_card);
                             print_card(d_card);
                         }
-                        if (d_point > 21)
+                        if (d_point > 21) //koniec gry, porównanie wyników i rozdanie nagród
                         {
-                            vallet += 3 * bet;
+                            vallet += 2 * bet;
                             cout << "Dealer zbustowal!!!!!\n\nWygrana: " << bet * 2 << "\n\nIlosc pieniedzy: " << vallet << "\n";
+                            system("pause");
+                        }
+                        else if (d_point > p_point)
+                        {
+                            cout << "Dealer wygral!!!!!\n\nPrzegrano: " << bet << "\n\nPunkty dealera: " << d_point << " Punkty gracza: " << p_point << "\n\nIlosc pieniedzy: " << vallet << "\n";
                             system("pause");
                         }
                         else if (d_point < p_point)
                         {
-                            vallet += 3 * bet;
+                            vallet += 2 * bet;
                             cout << "Wygrana!!!!!\n\nZysk: " << 2 * bet << "\n\nPunkty dealera: " << d_point << " Punkty gracza: " << p_point << "\n\nIlosc pieniedzy: " << vallet << "\n";
                             system("pause");
                         }
@@ -723,117 +787,34 @@ int main()
                             system("pause");
                         }
                     }
-                    else if (p_point < 21)
-                    {
-                        while (round)
-                        {
-                            cout << "Ilosc punktow: " << p_point << "\nPunkty dealera: " << d_point << "\nHit? Stand?\n"; //dobieranie kart dodatkowych przez użytkownika
-                            cin >> h_bust;
-                            while (h_s)
-                            {
-                                if ((h_bust == "hit") || (h_bust == "Hit"))
-                                {
-                                    p_card.random_card(dobrane);
-                                    p_point += p_card.points();
-                                    dobrane.push_back(p_card);
-
-                                    print_card(p_card);
-                                    if (p_point > 21)
-                                    {
-                                        cout << "BUST!!!\n\n przegrano: " << bet << "\n";
-                                        system("pause");
-                                        round = false;
-                                    }
-                                    h_s = false;
-                                }
-                                else if ((h_bust == "Stand") || (h_bust == "stand"))
-                                {
-                                    round = false;
-                                    h_s = false;
-                                }
-                                else
-                                {
-                                    cout << "Prosze odpowiedziec Hit/Stand\n";
-                                    h_s = false;
-                                }
-                            }
-                        }
-                    }
-
-                    if (p_point < 21)
-                    {
-                        cout << "Tura dealera...\n\n\n\n\n";
-                        temp_card = de_id(dobrane, 1);
-                        print_card(temp_card);
-                        print_card(d_card);
-                        if (d_point > 21) //sprawdzenie czy punkty dealera nie przekraczają 21
-                        {
-                            cout << "Dealer zbustowal!!!!!\n\nWygrana: " << bet * 2 << "\n\n";
-                            vallet += 2 * bet;
-                        }
-                        else
-                        {
-                            while (d_point < 16) // funkcja powoduje że dealer dobiera aż osiągnie 16 punktów
-                            {
-                                d_card.random_card(dobrane);
-                                d_point += d_card.points();
-                                dobrane.push_back(d_card);
-                                print_card(d_card);
-                            }
-                            if (d_point > 21) //koniec gry, porównanie wyników i rozdanie nagród
-                            {
-                                vallet += 2 * bet;
-                                cout << "Dealer zbustowal!!!!!\n\nWygrana: " << bet * 2 << "\n\nIlosc pieniedzy: " << vallet << "\n";
-                                system("pause");
-                            }
-                            else if (d_point > p_point)
-                            {
-                                cout << "Dealer wygral!!!!!\n\nPrzegrano: " << bet << "\n\nPunkty dealera: " << d_point << " Punkty gracza: " << p_point << "\n\nIlosc pieniedzy: " << vallet << "\n";
-                                system("pause");
-                            }
-                            else if (d_point < p_point)
-                            {
-                                vallet += 2 * bet;
-                                cout << "Wygrana!!!!!\n\nZysk: " << 2 * bet << "\n\nPunkty dealera: " << d_point << " Punkty gracza: " << p_point << "\n\nIlosc pieniedzy: " << vallet << "\n";
-                                system("pause");
-                            }
-                            else
-                            {
-                                vallet += bet;
-                                cout << "Remis!!!\n\nPunkty dealera: " << d_point << " Punkty gracza: " << p_point << "\n\nIlosc pieniedzy: " << vallet << "\n";
-                                system("pause");
-                            }
-                        }
-                    }
-                }
-                else //przypadek gdy gracz nie ma pieniędzy
-                {
-                    cout << "Nie masz wystarczajaco srodkow!";
-                    system("pause");
-                }
-                bool menu_status = true;
-                while (menu_status)
-                {
-                    std::string wybor;
-                    cout << "\n\n\n\n\n\n\n\n                        Grasz dalej? (t/n)\n";
-                    std::cin >> wybor;
-                    if ((wybor == "n") || (wybor == "N"))
-                    {
-                        statusBJ = false;
-                        menu_status = false;
-                    }
-                    else if ((wybor == "T") || (wybor == "t"))
-                    {
-                        menu_status = false;
-                    }
-                    else
-                    {
-                        cout << "Nie ma takiego wyboru!!!       (wpisz t/n)\n";
-                        system("pause");
-                    }
                 }
             }
-            break;
+            else //przypadek gdy gracz nie ma pieniędzy
+            {
+                cout << "Nie masz wystarczajaco srodkow!";
+                system("pause");
+            }
+            bool menu_status = true;
+            while (menu_status) //kontynuowanie gry
+            {
+                std::string wybor;
+                cout << "\n\n\n\n\n\n\n\n                        Grasz dalej? (t/n)\n";
+                std::cin >> wybor;
+                if ((wybor == "n") || (wybor == "N"))
+                {
+                    statusBJ = false;
+                    menu_status = false;
+                }
+                else if ((wybor == "T") || (wybor == "t"))
+                {
+                    menu_status = false;
+                }
+                else
+                {
+                    cout << "Nie ma takiego wyboru!!!       (wpisz t/n)\n";
+                    system("pause");
+                }
+            }
         }
     }
 }
