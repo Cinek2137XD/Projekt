@@ -710,7 +710,7 @@ int main()
                 {
                     while (round)
                     {
-                        cout << "Ilosc punktow: " << p_point << "\nPunkty dealera: " << d_point << "\nHit? Stand?\n"; //dobieranie kart dodatkowych przez użytkownika
+                        cout << "Ilosc punktow: " << p_point << "\nPunkty dealera: " << d_point-dobrane[3].points() << "\nHit? Stand?\n"; //dobieranie kart dodatkowych przez użytkownika
                         cin >> h_bust;
                         while (h_s)
                         {
