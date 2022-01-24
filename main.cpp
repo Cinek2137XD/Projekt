@@ -632,7 +632,7 @@ int main()
     using std::cin;
     using std::cout;
     using std::vector;
-    int vallet, decision;
+    int vallet;
     vallet = 100;
     bool status = true;
 
