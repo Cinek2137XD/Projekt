@@ -671,7 +671,8 @@ int main()
                 d_card.random_card(dobrane);
                 d_point += d_card.points();
                 dobrane.push_back(d_card); //3;
-                cout << d_point << " " << p_point << "\n";
+                //cout << d_point << " " << p_point << "\n";
+                //p_point = 1; //test punktów;
                 if (p_point > 21) //bust po dobraniu
                 {
                     cout << "BUST!!!\n\n przegrano: " << bet << "\n";
@@ -712,8 +713,8 @@ int main()
                     {
                         cout << "Ilosc punktow: " << p_point << "\nPunkty dealera: " << d_point-dobrane[3].points() << "\nHit? Stand?\n"; //dobieranie kart dodatkowych przez użytkownika
                         cin >> h_bust;
-                        while (h_s)
-                        {
+                        //while (h_s)
+                        //{
                             if ((h_bust == "hit") || (h_bust == "Hit"))
                             {
                                 p_card.random_card(dobrane);
@@ -739,7 +740,7 @@ int main()
                                 cout << "Prosze odpowiedziec Hit/Stand\n";
                                 h_s = false;
                             }
-                        }
+                        //}
                     }
                 }
 
@@ -791,6 +792,7 @@ int main()
             }
             else //przypadek gdy gracz nie ma pieniędzy
             {
+                system("cls");
                 cout << "Nie masz wystarczajaco srodkow!";
                 system("pause");
             }
@@ -798,6 +800,7 @@ int main()
             while (menu_status) //kontynuowanie gry
             {
                 std::string wybor;
+                system("cls");
                 cout << "\n\n\n\n\n\n\n\n                        Grasz dalej? (t/n)\n";
                 std::cin >> wybor;
                 if ((wybor == "n") || (wybor == "N"))
